@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('src checkout') {
+            steps {
+                echo 'java-maven-war project' 
+                git 'https://github.com/nikitharoyal/hello-world-war.git'
+                sh 'ls -lrt'
+            }
+        }
+        stage('build stage') {
+            steps {
+                sh 'mvn clean install'
+            }
+        }
+        stage('test stage') {
+            steps {
+                sh 'mvn clean test'
+            }
+        }
+        
+        stage('Deploy stage') {
+            steps {
+                echo 'this is deploy statge {TBD}'
+                sh 'echo Build ${Build_Number}'
+                //sh 'mvn clean install'
+            }
+        }
+    }
+}
